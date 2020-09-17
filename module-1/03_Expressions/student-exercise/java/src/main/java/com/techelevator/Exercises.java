@@ -232,7 +232,21 @@ public class Exercises {
 	 max1020(19, 11) → 19
 	 max1020(11, 9) → 11
 	 */
-	public int max1020(int a, int b)
+	public int max1020(int a, int b){
+		int result = 0;
+
+		boolean aInRange = a >= 10 && a <= 20;
+		boolean bInRange = b >= 10 && b <= 20;
+
+		if(aInRange && bInRange){
+			if (a > b){
+				result = a;
+			}
+			if (b > a){
+				result =  b;
+			}
+		}
+	}
 	/*
 	 16. When squirrels get together for a party, they like to have cigars. A squirrel party is successful
 	 when the number of cigars is between 40 and 60, inclusive. Unless it is the weekend, in which case
