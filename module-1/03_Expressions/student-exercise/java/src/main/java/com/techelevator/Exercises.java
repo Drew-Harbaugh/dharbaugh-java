@@ -100,7 +100,7 @@ public class Exercises {
 	/*
 	 7. Given 2 int values, return true if one is negative and one is positive. Except if the parameter
 	 "negative" is true, then return true only if both are negative.
-	 posNeg(1, -1, false) → true
+	 posNeg(1, -1, false) → rute
 	 posNeg(-1, 1, false) → true
 	 posNeg(-4, -5, true) → true
 	 */
@@ -174,7 +174,7 @@ public class Exercises {
 		}else if(c >= 13 && c <= 19){
 			return true;
 		}else {
-			return false;
+		    return false;
 		}
 	}
 
@@ -245,7 +245,12 @@ public class Exercises {
 			if (b > a){
 				result =  b;
 			}
+		} else  if(aInRange){
+			return a;
+		} else if(bInRange){
+			return b;
 		}
+		return  result;
 	}
 	/*
 	 16. When squirrels get together for a party, they like to have cigars. A squirrel party is successful
