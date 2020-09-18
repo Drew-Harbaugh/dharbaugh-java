@@ -189,13 +189,14 @@ public class Exercises {
 	 has22([2, 1, 2]) → false
 	 */
 	public boolean has22(int[] nums) {
-		if (nums[0] == 2 && nums[1] == 2){
-			return true;
-		} else if(nums[1] == 2 && nums[2] == 2){
-			return true;
-		} else{
-			return false;
-		}
+		boolean result= false;
+		for(int i = 0; i < nums.length - 1; i++) {
+			if (nums[i] == 2){
+				if (nums[i + 1] == 2){
+					result = true;
+				}
+			}
+		} return result;
 	}
 
 	/*
