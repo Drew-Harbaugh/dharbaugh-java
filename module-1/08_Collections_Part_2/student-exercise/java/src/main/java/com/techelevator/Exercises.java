@@ -34,7 +34,26 @@ public class Exercises {
 	 *
 	 */
 	public String animalGroupName(String animalName) {
-		return null;
+		Map<String,String>groupName = new HashMap<String,String>();
+		groupName.put("rhino", "Crash");
+		groupName.put("giraffe", "Tower");
+		groupName.put("elephant", "Herd");
+		groupName.put("lion", "Pride");
+		groupName.put("crow", "Murder");
+		groupName.put("pigeon", "Kit");
+		groupName.put("flamingo", "Pat");
+		groupName.put("deer", "Herd");
+		groupName.put("dog", "Pack");
+		groupName.put("crocodile", "Float");
+		if(animalName == null){
+			return "unknown";
+		}
+		animalName = animalName.toLowerCase();
+		if (groupName.containsKey(animalName)){
+			return groupName.get(animalName);
+		} else {
+			return "unknown";
+		}
 	}
 
 	/*
@@ -60,8 +79,26 @@ public class Exercises {
 	 *
 	 */
 	public double isItOnSale(String itemNumber) {
-		return -1.0;
+
+		Map<String,Double> onSale = new HashMap<>();
+
+		onSale.put("KITCHEN4001", 0.20);
+		onSale.put("GARAGE1070", 0.15);
+		onSale.put("LIVINGROOM", 0.10);
+		onSale.put("KITCHEN6073", 0.40);
+		onSale.put("BEDROOM3434", 0.60);
+		onSale.put("BATH0073", 0.15);
+
+		if(itemNumber == null){
+			return 0.00;
+		}
+		Double result = onSale.get(itemNumber.toUpperCase());
+		if(result == null){
+			return 0.00;
+		}
+		return result;
 	}
+
 
 	/*
 	 * Modify and return the given Map as follows: if "Peter" has more than 0 money, transfer half of it to "Paul",
@@ -74,7 +111,37 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> robPeterToPayPaul(Map<String, Integer> peterPaul) {
-		return null;
+
+		int peter = peterPaul.get("Peter");
+		int paul = peterPaul.get("Paul");
+
+		Map<String,Integer> money = new HashMap<>();
+		money.put("penny", 1);
+		money.put("nickel", 5);
+		money.put("dime", 10);
+		money.put("quarter", 25);
+		money.put("$1", 100);
+		money.put("$10", 1000);
+		money.put("$20", 2000);
+		money.put("$50", 5000);
+		money.put("$100", 10000);
+
+		if(peter > 0 && paul < 1000){
+			if(peter % 2 != 0){
+				peter = peter / 2;
+				paul = peter + paul;
+				peter++;
+			}else if(peter > 0 && paul < 1000){
+				peter = peter / 2;
+				paul = peter + paul;
+			} else{
+				return peterPaul;
+			}
+		}
+		peterPaul.put("Peter", peter);
+		peterPaul.put("Paul", paul);
+
+		return peterPaul;
 	}
 
 	/*
@@ -87,7 +154,25 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> peterPaulPartnership(Map<String, Integer> peterPaul) {
-		return null;
+		int peter = peterPaul.get("Peter");
+		int paul = peterPaul.get("Paul");
+
+		if(peter >= 5000 && paul >= 10000){
+			int peterPartnership = peter / 4;
+			peter = peter - peterPartnership;
+			int paulPartnership = paul / 4;
+			paul = paul - paulPartnership;
+			int total = peterPartnership + paulPartnership;
+			peterPaul.put("Peter", peter);
+			peterPaul.put("Paul", paul);
+			peterPaul.put("PeterPaulPartnership", total);
+			return peterPaul;
+
+
+		} else {
+			return peterPaul;
+		}
+
 	}
 
 	/*
@@ -99,7 +184,11 @@ public class Exercises {
 	 * beginningAndEnding(["muddy", "good", "moat", "good", "night"]) → {"g": "d", "m": "t", "n": "t"}
 	 */
 	public Map<String, String> beginningAndEnding(String[] words) {
-		return null;
+		Map<String,String> letter = new HashMap<>();
+		for(String result : words){
+			letter.put(result.substring(0, 1), result.substring(result.length() - 1));
+		}
+		return letter;
 	}
 
 	/*
@@ -115,7 +204,18 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> wordCount(String[] words) {
-		return null;
+		Map<String,Integer> result = new HashMap<>();
+
+		for (String word : words){
+			if(result.containsKey(word)){
+				int total = result.get(word);
+				total = total + 1;
+				result.put(word, total);
+			} else {
+				result.put(word, 1);
+			}
+		}
+		return result;
 	}
 
 	/*
@@ -130,7 +230,19 @@ public class Exercises {
 	 *
 	 */
 	public Map<Integer, Integer> integerCount(int[] ints) {
-		return null;
+
+		Map<Integer, Integer> result = new HashMap<>();
+
+		for(int check : ints) {
+			if(result.containsKey(check)) {
+				int count = result.get(check);
+				count = count + 1;
+				result.put(check, count);
+			} else {
+				result.put(check, 1);
+			}
+		}
+		return result;
 	}
 
 	/*
@@ -143,8 +255,16 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Boolean> wordMultiple(String[] words) {
-		return null;
-	}
+
+		Map<String, Boolean>wordCheck = new HashMap<>();
+
+		for(String result : words){
+			if(wordCheck.containsKey(result)){
+				Boolean count = wordCheck.get(result);
+
+			}
+		} return null;
+	} // Am I able to use two different maps to get the answer?
 
 	/*
 	 * Given two Maps, Map<String, Integer>, merge the two into a new Map, Map<String, Integer> where keys in Map2,
@@ -158,7 +278,22 @@ public class Exercises {
 	 */
 	public Map<String, Integer> consolidateInventory(Map<String, Integer> mainWarehouse,
 			Map<String, Integer> remoteWarehouse) {
-		return null;
+
+		Map<String, Integer>map1 = new HashMap<>();
+
+		for (String result : mainWarehouse.keySet()){
+			if(mainWarehouse.containsKey(result) == remoteWarehouse.containsKey(result)){
+			map1.put(result, mainWarehouse.get(result) + remoteWarehouse.get(result));
+		} else {
+			map1.put(result, mainWarehouse.get(result));
+		}
+		}
+		for(String result : remoteWarehouse.keySet()){
+			if (remoteWarehouse.containsKey(result)!= mainWarehouse.containsKey(result)){
+				map1.put(result, remoteWarehouse.get(result));
+			}
+		}
+		return map1;
 	}
 
 	/*
@@ -177,7 +312,22 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> last2Revisited(String[] words) {
-		return null;
+
+		Map<String, Integer> answer = new HashMap<>();
+
+		int size = words.length;
+		for(String result : words){
+			if(size < 3){
+				answer.put(result, 0);
+				String newResult = result + 1;
+				answer.put(newResult, 0);
+			} else if(size >= 3){
+				int i = words.length - 2;
+				answer.put(i)
+			}
+		}
+		return answer;
 	}
+
 
 }
