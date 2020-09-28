@@ -5,11 +5,16 @@ import java.util.Map;
 
 public class Card {
 
+    private static final String DEFAULT_SUIT = "Spades";
+    private static final String DEFAULT_RANK = "Ace";
+
+    private static int createdCount;
+
     private String suit;
     private String rank;
     private boolean faceUp = false;
 
-    private Map<String, Integer> rankValue = setupRankValues();
+    private Map<String, Integer> rankValues = setupRankValues();
     private Map<String, Integer> setupRankValues(){
         Map<String, Integer> result = new HashMap<>();
         result.put("Ace", 1);
@@ -29,8 +34,7 @@ public class Card {
     }
 
     public Card(){
-        setSuit("Spades");
-        setRank("Ace");
+        this(DEFAULT_SUIT, DEFAULT_RANK);
     }
 
     public Card(String suit){
@@ -41,6 +45,12 @@ public class Card {
     public Card(String suit, String rank){
         setSuit(suit);
         setRank(rank);
+
+        createdCount++;
+    }
+
+    public static int getCreatedCount(){
+        return createdCount;
     }
 
     public String getSuit(){
@@ -81,11 +91,32 @@ public class Card {
         //setFaceUp(!isFaceUp()); //another option
     }
     public int getValue() {
-        return rankValue.get(getRank());
+        return rankValues.get(getRank());
     }
 
     public boolean isHigherThan(Card otherCard){
         return getValue() > otherCard.getValue();
+    }
+
+    public boolean isHigherThan(String rank){
+        return this.getValue() > rankValues.get(rank);
+    }
+
+    public String toString(){
+        if (isFaceUp()) {
+            return getName();
+        }else {
+            return "Face Down Card";
+        }
+    }
+
+    public boolean equals(Object otherObject){
+        boolean result = false;
+        if(otherObject instanceof Card){
+            Card otherCard = (Card) otherObject;
+            result = otherCard.getName().equals(this.getName());
+        }
+        return result;
     }
 
 }
