@@ -15,7 +15,7 @@ public class BidTests {
     public void setup(){
         sut = new Bid(BIDDER_NAME, BID_AMOUNT);
     }
-// If used i have to delete my first line on every test.
+
 
     @Test
     public void getBidder_returns_bidder_name(){
