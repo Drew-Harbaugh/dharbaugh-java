@@ -13,7 +13,7 @@ public class Examples {
 
 		//examples.inspectFilesystem();
 		//examples.createDirectory();
-		//examples.createOrReplaceFile();
+		examples.createOrReplaceFile();
 		//examples.addToFile();
 	}
 	
@@ -62,10 +62,8 @@ public class Examples {
     	String target = promptForString("Enter the path of the file to create or replace: ");
     	String content = promptForString("Enter content for the file: ");
 
-    	try {
-			PrintWriter writer = new PrintWriter(target);
+    	try (PrintWriter writer = new PrintWriter(target)) {
     		writer.println(content);
-    		writer.close();
     		System.out.println("File has been created (or replaced).");
 		} catch (IOException e) {
     		System.out.println("Couldn't create or replace file.");
