@@ -10,18 +10,14 @@ import java.util.Scanner;
 public class FileSplitter {
 
 	public static void main(String[] args) {
-
 		try (Scanner userInput = new Scanner(System.in)) {
 			System.out.print("Where is the input file (please include the path to the file)? ");
 			String filePath = userInput.nextLine();
-
 			try {
-				File fileToRead = getFileAtPath(filePath);
-
+				File readingFile = pathFile(filePath);
 				System.out.print("How many lines of text (max) should there be in the split files? ");
 				int lines = 0;
 				boolean value = false;
-
 				while (!value) {
 					try {
 						lines = userInput.nextInt();
@@ -34,12 +30,11 @@ public class FileSplitter {
 						userInput.nextLine();
 					}
 				}
-				// At this point we have the file to read and how many lines should be in the split files
-				try (Scanner fileInput = new Scanner(fileToRead)) {
+				try (Scanner fileInput = new Scanner(readingFile)) {
 					int fileCount = 1;
 					while (fileInput.hasNextLine()) {
-						String splitFileName = getNextFileName(fileToRead, fileCount);
-						File outputFile = new File(fileToRead.getParentFile(), splitFileName);
+						String splitFileName = getNextFileName(readingFile, fileCount);
+						File outputFile = new File(readingFile.getParentFile(), splitFileName);
 						try (PrintWriter fileOutput = new PrintWriter(outputFile)) {
 							for (int i = 0; i < lines; i++) {
 								if (fileInput.hasNextLine()) {
@@ -49,11 +44,9 @@ public class FileSplitter {
 								}
 							}
 						}
-
 						fileCount++;
 					}
 				}
-
 			} catch (IOException ex) {
 				System.out.println(ex.getMessage());
 				System.exit(1);
@@ -61,26 +54,23 @@ public class FileSplitter {
 		}
 	}
 
-	private static File getFileAtPath(String filePath) throws IOException {
-		File ourFile = new File(filePath);
-
-		if (!ourFile.exists()) {
+	private static File pathFile(String filePath) throws IOException {
+		File fileResult = new File(filePath);
+		if (!fileResult.exists()) {
 			throw new FileNotFoundException("There was no file at " + filePath);
 		}
-
-		if (!ourFile.isFile()) {
+		if (!fileResult.isFile()) {
 			throw new IOException(filePath + " is not a file.");
 		}
-
-		return ourFile;
+		return fileResult;
 	}
 
 	private static String getNextFileName(File inputFile, int count) {
 		String fileName = inputFile.getName();
 		String extension = fileName.substring(fileName.lastIndexOf('.'));
-		String nameWithNoExtension = fileName.substring(0, fileName.lastIndexOf('.'));
+		String name = fileName.substring(0, fileName.lastIndexOf('.'));
 
-		return nameWithNoExtension + "-" + count + extension;
+		return name + "-" + count + extension;
 	}
 
 }

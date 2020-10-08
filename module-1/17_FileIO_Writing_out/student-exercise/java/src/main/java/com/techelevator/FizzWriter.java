@@ -2,7 +2,6 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -14,11 +13,9 @@ public class FizzWriter {
 			System.out.print("Destination for FizzBuzz.txt?");
 			String filePath = userInput.nextLine();
 
-			FizzBuzz300(filePath);
+			result(filePath);
 		}
-	}
-
-//	File newFile = new File("FizzBuzz.txt");
+	}//	File newFile = new File("FizzBuzz.txt");
 
 	private static boolean fizz5(int number) {
 		String numberAsString = Integer.toString(number);
@@ -36,9 +33,8 @@ public class FizzWriter {
 		return false;
 	}
 
-	private static void FizzBuzz300(String filePath) {
+	private static void result(String filePath) {
 		File fizzBuzzFile = new File(filePath + "/FizzBuzz.txt");
-
 		try (PrintWriter fileOutput = new PrintWriter(fizzBuzzFile)) {
 			for (int i = 1; i < 301; i++) {
 				if (i % 5 == 0 && i % 3 == 0) {
