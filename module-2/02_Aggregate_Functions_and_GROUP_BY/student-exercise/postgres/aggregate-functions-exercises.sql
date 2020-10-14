@@ -153,7 +153,7 @@ ORDER BY abso;
 -- ordered from highest to lowest.
 -- (highest avg population: 4017733.0000, "SGP")
 
-SELECT AVG(population) AS country_city_population, city.countrycode
+SELECT AVG(population) AS country_city_population, countrycode
 FROM city
 GROUP BY countrycode
 ORDER BY country_city_population DESC;
@@ -181,7 +181,7 @@ ORDER BY COUNT DESC;
 -- 20. The count of cities in each country ordered from highest to lowest.
 -- (largest number of  cities ib a country: 363, "CHN")
 
-SELECT COUNT(*), city.countrycode
+SELECT COUNT(*), countrycode
 FROM city
 GROUP BY countrycode
 ORDER BY COUNT DESC;
@@ -191,7 +191,7 @@ ORDER BY COUNT DESC;
 -- lowest.
 -- (largest city population in world: 10500000, "IND")
 
-SELECT MAX(population), city.countrycode
+SELECT MAX(population), countrycode
 FROM city
 GROUP BY countrycode
 ORDER BY MAX DESC;
