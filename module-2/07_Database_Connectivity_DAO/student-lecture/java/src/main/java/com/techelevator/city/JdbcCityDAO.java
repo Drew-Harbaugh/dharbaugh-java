@@ -9,6 +9,8 @@ import java.util.List;
 
 public class JdbcCityDAO implements CityDAO {
 
+    private static final String ALL_FIELDS = "id, name, district, countrycode, population";
+
     private JdbcTemplate jdbcTemplate;
     public JdbcCityDAO(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
@@ -16,7 +18,12 @@ public class JdbcCityDAO implements CityDAO {
 
     @Override
     public void create(City newCity) {
-
+        String sql = "INSERT INTO city (name, district, countrycode, population) VALUES (?,?,?,?) RETURNING id;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, newCity.getName(), newCity.getDistrict(),
+                                   newCity.getCountryCode(), newCity.getPopulation());
+        if (rowSet.next()) {
+            newCity.setId(rowSet.getLong("id"));
+        }
     }
 
     @Override
@@ -58,12 +65,14 @@ public class JdbcCityDAO implements CityDAO {
 
     @Override
     public void update(City city) {
-
+        String sql = "UPDATE city SET name = ?, district = ?, countrycode = ?, population = ? WHERE id = ?;";
+        jdbcTemplate.update(sql, city.getName(), city.getDistrict(),
+                                 city.getCountryCode(), city.getPopulation(), city.getId());
     }
 
     @Override
     public void delete(long id) {
-
+        jdbcTemplate.update("DELETE FROM city WHERE id = ?, id");
     }
 
     private City mapRowToCity(SqlRowSet rowSet) {

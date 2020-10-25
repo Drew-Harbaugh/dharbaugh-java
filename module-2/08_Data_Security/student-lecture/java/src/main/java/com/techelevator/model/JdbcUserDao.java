@@ -48,17 +48,17 @@ public class JdbcUserDao implements UserDao {
         
         User newUser = null;
         
-       // try {
+        try {
 	        long newId = jdbcTemplate.queryForObject("INSERT INTO users(username, password, salt) VALUES (?, ?, ?) RETURNING id", Long.class, userName,
 	                hashedPassword, saltString);
 	
 	        newUser = new User();
 	        newUser.setId(newId);
 	        newUser.setUsername(userName);
-      //  }
-      //  catch (DataAccessException e) {
-        	//leave newUser as null
-       // }
+        }
+        catch (DataAccessException e) {
+//        	leave newUser as null
+        }
 
         return newUser;
     }
@@ -74,9 +74,9 @@ public class JdbcUserDao implements UserDao {
      */
     @Override
     public boolean isUsernameAndPasswordValid(String userName, String password) {
-        String sqlSearchForUser = "SELECT * FROM users WHERE UPPER(username) = '" + userName.toUpperCase() + "'";
+        String sqlSearchForUser = "SELECT * FROM users WHERE UPPER(username) = ?;";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForUser);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForUser, userName.toUpperCase());
         if (results.next()) {
             String storedSalt = results.getString("salt");
             String storedPassword = results.getString("password");

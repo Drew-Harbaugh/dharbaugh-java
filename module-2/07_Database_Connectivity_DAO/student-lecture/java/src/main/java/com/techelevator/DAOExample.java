@@ -33,5 +33,17 @@ public class DAOExample {
             System.out.println(c.getName() + ", " + c.getDistrict());
         }
 
+        City wuhan = cityDAO.findCityById(1894);
+        wuhan.setPopulation(12_000_000);
+        cityDAO.update(wuhan);
+
+//        City norwood = new City();
+//        norwood.setName("Norwood");
+//        norwood.setDistrict("Ohio");
+//        norwood.setCountryCode("USA");
+//        norwood.setPopulation(20_000);
+//        cityDAO.create(norwood);
+//        System.out.println("Norwood created with id " + norwood.getId());
+
     }
 }
