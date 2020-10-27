@@ -1,5 +1,6 @@
 package com.techelevator.auction;
 
+import java.net.IDN;
 import java.util.Scanner;
 
 import org.springframework.web.client.RestTemplate;
@@ -21,23 +22,49 @@ public class App {
     }
 
     public Auction[] listAllAuctions() {
-        // api code here
-        return null;
+        Auction[] auction = restTemplate.getForObject(API_URL, Auction[].class);
+        return auction;
     }
+
 
     public Auction listDetailsForAuction() {
-        // api code here
-        return null;
+        System.out.print("Please choose an option: ");
+        int scan = 0;
+        try{
+            scan = Integer.parseInt(scanner.nextLine());
+            Auction auction = restTemplate.getForObject(API_URL + "/" + scan, Auction.class);
+            return auction;
+        } catch (NumberFormatException exception){
+            return null;
+        }
     }
+
+
+
 
     public Auction[] findAuctionsSearchTitle() {
-        // api code here
-        return null;
+        try {
+            System.out.println("Please pick auction by price: ");
+            String scan = scanner.nextLine();
+            Auction[] auctionTitle = restTemplate.getForObject(API_URL + "?title_like=" + scan, Auction[].class);
+            return auctionTitle;
+        } catch (NumberFormatException exception) {
+            return null;
+        }
     }
 
+
+
     public Auction[] findAuctionsSearchPrice() {
-        // api code here
-        return null;
+        double scan = 0;
+        try{
+            System.out.println("Please pick auction by price: ");
+            scan = Double.parseDouble(scanner.nextLine());
+            Auction[] auctionPrice = restTemplate.getForObject(API_URL + "?currentBid_lte=" + scan, Auction[].class);
+            return auctionPrice;
+        } catch (NumberFormatException exception){
+            return null;
+        }
     }
 
     private void run() {
