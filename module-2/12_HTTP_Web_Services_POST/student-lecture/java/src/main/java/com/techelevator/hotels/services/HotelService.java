@@ -2,6 +2,9 @@ package com.techelevator.hotels.services;
 
 import com.techelevator.hotels.models.Hotel;
 import com.techelevator.hotels.models.Reservation;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
@@ -25,8 +28,15 @@ public class HotelService {
    * @return Reservation
    */
   public Reservation addReservation(String newReservation) {
-    // TODO: Implement method
-    return null;
+    Reservation reservation = makeReservation(newReservation);
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<Reservation> entity = new HttpEntity<>(reservation, headers);
+    try {
+      return restTemplate.postForObject(baseUrl + "reservation", entity, Reservation.class);
+    } catch (ResourceAccessException | RestClientResponseException e) {
+      return null;
+    }
   }
 
   /**
@@ -37,9 +47,18 @@ public class HotelService {
    * @return
    */
   public Reservation updateReservation(String CSV) {
-    // TODO: Implement method
-    return null;
+    Reservation reservation = makeReservation(CSV);
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<Reservation> entity = new HttpEntity<>(reservation, headers);
+    try {
+      restTemplate.put(baseUrl + "reservation/"+ reservation.getId(), entity);
+      return reservation;
+    } catch (ResourceAccessException | RestClientResponseException e) {
+      return null;
+    }
   }
+
 
   /**
    * Delete an existing reservation
@@ -47,7 +66,17 @@ public class HotelService {
    * @param id
    */
   public void deleteReservation(int id) {
-    // TODO: Implement method
+    try {
+      restTemplate.delete(baseUrl + "reservation/" + id);
+    } catch (ResourceAccessException e) {
+      System.out.println("Couldn't connect to server.");
+    } catch (RestClientResponseException e) {
+      if (e.getRawStatusCode() == 404) {
+        System.out.println("That reservation doesn't exist.");
+      } else {
+        System.out.println("Something went wrong. Couldn't delete.");
+      }
+    }
   }
 
   /* DON'T MODIFY ANY METHODS BELOW */

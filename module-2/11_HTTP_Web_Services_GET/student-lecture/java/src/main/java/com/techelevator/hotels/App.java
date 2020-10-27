@@ -2,9 +2,13 @@ package com.techelevator.hotels;
 
 import java.util.Scanner;
 
+
 import org.springframework.web.client.RestTemplate;
 
 public class App {
+    private static final String API_URL = "http://localhost:3000";
+    private final RestTemplate restTemplate = new RestTemplate();
+
 
     public static void main(String[] args) {
         App app = new App();
@@ -25,15 +29,15 @@ public class App {
             }
             System.out.println();
             if (menuSelection == 1) {
-                System.out.println("Not implemented");
+                listHotels();
             } else if (menuSelection == 2) {
-                System.out.println("Not implemented");
+                listReviews();
             } else if (menuSelection == 3) {
-                System.out.println("Not implemented");
+                showHotel();
             } else if (menuSelection == 4) {
-                System.out.println("Not implemented");
+                showHotel1Reviews();
             } else if (menuSelection == 5) {
-                System.out.println("Not implemented");
+                list3StarHotels();
             } else if (menuSelection == 0) {
                 continue;
             } else {
@@ -43,6 +47,37 @@ public class App {
             scanner.nextLine();
         }
     }
+
+    private void listHotels(){
+
+        Hotel[] hotels = restTemplate.getForObject(API_URL + "/hotels", Hotel[].class);
+        printHotels(hotels);
+    }
+
+    private void listReviews(){
+        RestTemplate restTemplate = new RestTemplate();
+        Review[] reviews = restTemplate.getForObject(API_URL + "/reviews", Review[].class);
+        printReviews(reviews);
+    }
+
+    private void showHotel(){
+        RestTemplate restTemplate = new RestTemplate();
+        Hotel hotel1 = restTemplate.getForObject(API_URL + "/hotels/1", Hotel.class);
+        printHotel(hotel1);
+    }
+
+    private void showHotel1Reviews(){
+        RestTemplate restTemplate = new RestTemplate();
+        Review[] reviews = restTemplate.getForObject(API_URL + "/hotels/1/reviews", Review[].class);
+        printReviews(reviews);
+    }
+
+    private void list3StarHotels(){
+        RestTemplate restTemplate = new RestTemplate();
+        Hotel[] hotels = restTemplate.getForObject(API_URL + "/hotels?stars=3", Hotel[].class);
+        printHotels(hotels);
+    }
+
 
     private void printGreeting() {
         System.out.println();
