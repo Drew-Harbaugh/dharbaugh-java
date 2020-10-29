@@ -7,7 +7,7 @@ import com.techelevator.hotels.services.HotelService;
 
 public class App {
 
-    private static final String API_BASE_URL = "http://localhost:3000/";
+    private static final String API_BASE_URL = "http://localhost:8080/";
     private final ConsoleService consoleService = new ConsoleService();
     private final HotelService hotelService = new HotelService(API_BASE_URL);
 
