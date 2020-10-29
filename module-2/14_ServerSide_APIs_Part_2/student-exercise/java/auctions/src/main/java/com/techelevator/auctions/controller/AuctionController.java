@@ -41,9 +41,22 @@ public class AuctionController {
         return dao.get(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public Auction create(@RequestBody Auction auction) {
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping()
+    public Auction create(@Valid @RequestBody Auction auction) throws AuctionNotFoundException  {
         return dao.create(auction);
+    }
+
+    @PutMapping("/{id}")
+    public Auction updateAuction(@PathVariable int id,
+                                 @Valid @RequestBody Auction updateAuction) throws AuctionNotFoundException {
+        return dao.update(updateAuction, id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void  deleteAuction(@PathVariable int id) throws AuctionNotFoundException{
+        dao.delete(id);
     }
 
 
