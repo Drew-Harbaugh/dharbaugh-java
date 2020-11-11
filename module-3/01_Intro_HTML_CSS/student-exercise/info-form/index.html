@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1 style="color: #034694;">Chelsea Fan Club</h1>
+        <p>Join the BLUES!!!</p>
+    </header>
+
+    <nav>
+        <a href="/fan-page/index.html">Back to fanpage</a>
+    </nav>
+
+    <main>
+        <h2>Fan Form</h2>
+
+        <form action="https://httpbin.org/post" method="Post">
+
+            <div>
+                <label for="reservationName">Name:</label>
+                <input type="text" name="reservationName" required />
+            </div>
+            <div>
+                <label for="emailAddress">Email Address:</label>
+                <input type="text" name="email" required />
+            </div>
+            <div>
+                <label for="dateOfBirth">Date of birth</label>
+                <input type="date" name="dateOfBirth" />
+            </div>
+            <div>
+                <label for="favoriteColor">Favorite color</label>
+                <input type="color" name="favoriteColor" />
+            </div>
+            <div>
+                <label for="favoriteNumber">Favorite number</label>
+                <input type="number" name="favoriteNumber" />
+            </div>
+            <div>
+                <label for="correctData">Is this data correct?</label>
+                <input type="checkbox" name="correctData" />
+            </div>
+
+            <button>Submit</button>
+        </form>
+
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+main {
+    background-image: url(https://traveldigg.com/wp-content/uploads/2016/08/Stamford-Bridge-Chelsea-Stadium.jpg);
+    
+}
+
+img {
+    width: 20%;
+    margin: auto;
+    display: block;
+    border-radius: 500%;
+   
+  }
+
+header {
+    background-color: #034694;
+    font-family: monospace;
+}
+
+p {
+    color: white;
+    font-size: 30px;
+    text-align: center;
+}
+
+nav {
+    text-align: right;
+}
+
+div {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: auto;
+    background-color:  #034694;
+    border-radius: 25px;
+    padding: 0px;
+    width: 1000px;
+    margin-left: 120px;
+}
+
+h1 {
+    font-size: 80px;
+    text-align: center;
+    color: white;
+    margin-bottom: 1%;
+    margin-top: auto;
+    text-decoration: underline;
+}
+
+
+a {
+    color: lightgray;
+    text-align: center;
+}
+
+
+table,
+td {
+    border: 3px solid #333;
+    
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: black;
+}
+
+
+/* footer {
+    text-align: center;
+    color: white;
+} */
+
+h2 {
+    text-align: center;
+    color: white;
+    margin: 7%;
+    margin-bottom: auto;
+    font-weight: 5%;
+    font-family: monospace;
+    font-size: 30px;
+    text-decoration: underline;
+}
+
+table {
+    color: white;
+    margin: auto;
+    background-color: #034694;
+  }
+
+  h5 {
+      color: white;
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: auto;
+      font-family: monospace;
+      text-decoration: underline;
+  }
+
+  h3 {
+      color: white;
+      margin-bottom: auto;
+      font-family: monospace;
+      text-decoration: underline;
+      }
