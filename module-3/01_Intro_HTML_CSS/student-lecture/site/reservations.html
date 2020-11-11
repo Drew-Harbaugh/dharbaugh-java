@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1 style="color: fuchsia;">Bits & Bytes</h1>
+        <p>Welcome to the Internet's best restraunt</p>
+    </header>
+
+    <nav>
+        <a href="index.html">View our menu</a>
+    </nav>
+
+    <main>
+        <h2>reservation Form</h2>
+
+        <!-- <form action="https://google.com/search" method="GET">
+            <input type="text" name="q" />
+            <button>Search with Google</button>
+        </form> -->
+
+        <form action="https://httpbin.org/post" method="Post">
+
+            <div>
+                <label for="reservationName">Name:</label>
+                <input type="text" name="reservationName" placeholder="Your Name" />
+            </div>
+            <div>
+                <label for="numberOfGuest">Number of guests:</label>
+                <input type="number" name="numberOfGuest" />
+            </div>
+            <div>
+                <label for="reservationDate">Date</label>
+                <input type="date" name="reservationDate" />
+            </div>
+            <div>
+                <label for="reservationTime">Time</label>
+                <input type="time" name="reservationTime" />
+            </div>
+            <div>
+                <label for="specialOccasion">Is this a special occasion?</label>
+                <input type="checkbox" name="specialOccasion" />
+            </div>
+
+            <button>Make Reservation</button>
+        </form>
+
+
+    </main>
+
+</body>
+
+</html>
