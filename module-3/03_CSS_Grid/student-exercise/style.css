@@ -50,3 +50,120 @@ header img {
 #student-picture img{
     border-radius: 50%;
 }
+
+#main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+        "head   head   pic"
+        "quote   quote   pic"
+        "profile  profile  contact"
+        "experience  experience  experience"
+    ;
+    row-gap: 20px;
+    column-gap: 50px;
+    align-items: center;
+}
+
+#headline {
+    grid-area: head;
+}
+
+#student-picture {
+    grid-area: pic;
+    text-align: center;
+}
+
+#student-quote {
+    grid-area: quote;
+}
+
+#student-profile {
+    grid-area: profile;
+}
+
+#student-contact {
+    grid-area: contact;
+    text-align: center;
+}
+
+
+#experience-grid {
+    grid-area: experience;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "code   code "
+        "data  data"
+        "web  design"
+    ;
+    row-gap: 20px;
+    column-gap: 50px;
+}
+
+#experience-code {
+    grid-area: code;
+}
+
+#experience-database {
+    grid-area: data;
+}
+
+#experience-web {
+    grid-area: web;
+}
+
+#experience-design {
+    grid-area: design;
+}
+
+@media (max-width: 1024px) {
+    #main-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        "head head"
+        "quote pic"
+        "profile contact"
+        "new-experience new-experience"
+        ;
+        column-gap: 35px;
+    }
+    #experience-grid {
+        grid-area: new-experience;
+        column-gap: 20px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        "code web"
+        "data design"
+        ;
+        row-gap: 20px;
+    }
+}
+
+    @media (max-width: 450px) {
+        #main-grid {
+            grid-template-columns: 1fr;
+            grid-template-areas: 
+            "head"
+            "pic"
+            "contact"
+            "quote"
+            "profile"
+            "new-experience"
+            ;
+        }
+        #experience-grid {
+            grid-area: new-experience;
+            grid-template-columns: 1fr;
+            grid-template-areas: 
+            "code"
+            "web"
+            "data"
+            "design"
+            ;
+        }
+    }
+
+
+
+
