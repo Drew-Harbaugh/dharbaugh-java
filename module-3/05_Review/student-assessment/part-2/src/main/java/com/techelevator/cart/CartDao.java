@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CartDao {
 
-	public void save(Cart newCart);
+	public int save(Cart newCart);
 
 	public List<Cart> getAllCarts();
 

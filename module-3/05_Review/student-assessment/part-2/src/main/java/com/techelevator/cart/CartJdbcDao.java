@@ -1,6 +1,5 @@
 package com.techelevator.cart;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
@@ -17,16 +16,23 @@ public class CartJdbcDao implements CartDao {
 
 
 	@Override
-	public void save(Cart newCart) {
-		// Implement this method to save cart to database
+	public int save(Cart newCart) {
+		String sql = "INSERT INTO carts (id, username, cookie_value, created) VALUES (DEFAULT, ?, ?, ?)";
+		return jdbcTemplate.update(sql, newCart.getUsername(),newCart.getCookieValue(),newCart.getCreated());
 
 	}
 
 	@Override
 	public List<Cart> getAllCarts() {
-		// Implement this method to pull in all carts from database
+		List<Cart> cart = new ArrayList<>();
+		String sql = "SELECT * FROM carts";
 
-		return null;
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+		while (results.next()) {
+			Cart cart1 = mapRowToCart(results);
+			cart.add(cart1);
+		}
+		return cart;
 	}
 
 	private Cart mapRowToCart(SqlRowSet results) {
