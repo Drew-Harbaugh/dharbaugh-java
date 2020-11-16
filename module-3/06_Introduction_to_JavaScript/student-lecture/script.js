@@ -2,6 +2,8 @@
     Example of a multi-line comment just like in C#/Java
 */
 
+console.log("Hello from the script.js file!");
+
 // Single line comment
 
 /**
@@ -10,19 +12,39 @@
  */
 function variables() {
   // Declares a variable where the value cannot be changed
+
+  const daysPerWeek = 7;
+
+  console.log('There are ' + daysPerWeek + ' days in a week.');
+
   // Declares a variable those value can be changed
+
+  let daysPerMonth = 30;
+
+  console.log('There are ${daysPerMonth} days this month.');
+
   // Declares a variable that will always be an array
+
+  const weekdays = ['Monday', 'Tuesday', 'Wednesday' , 'Thursday', 'Friday'];
+  
+  weekdays[0] = 'Moonday';
+
+  console.log(weekdays);
+
+  console.table(weekdays);
+
+  return null;
 }
 
 /**
  * Functions can also accept parameters.
  * Notice the parameters do not have types.
- * @param {Number} param1 The first number to display
- * @param {Number} param2 The second number to display
+ * @param {Number} fred The first number to display
+ * @param {Number} mary The second number to display
  */
-function printParameters(param1, param2) {
-  console.log(`The value of param1 is ${param1}`);
-  console.log(`The value of param2 is ${param2}`);
+function printParameters(fred, mary) {
+  console.log(`The value of param1 is ${fred}`);
+  console.log(`The value of param2 is ${mary}`);
 }
 
 /**
@@ -75,9 +97,22 @@ function objects() {
 
   // Log the object
 
+  console.log(person);
+
   // Log the first and last name
 
+  console.log(`${person.firstName} ${person['lastName']}`);
+
   // Log each employee
+
+for (let i = 0; i < person.employees.length; i++) {
+  console.log(`Employee ${i} is ${person.employees[i]}.`)
+}
+
+for (let employee of person.employees) {
+  console.log('Employee: ${employee}');
+}
+
 }
 
 /*
@@ -115,6 +150,10 @@ function mathFunctions() {
   console.log('Math.random() : ' + Math.random());
 }
 
+function rollDie() {
+  return Math.floor(Math.random() * 6) + 1;
+}
+
 /*
 ########################
 String Methods
@@ -128,6 +167,8 @@ function stringFunctions(value) {
   console.log(`.endsWith('World') - ${value.endsWith('World')}`);
   console.log(`.startsWith('Hello') - ${value.startsWith('Hello')}`);
   console.log(`.indexOf('Hello') - ${value.indexOf('Hello')}`);
+
+
 
   /*
     Other Methods
@@ -151,19 +192,49 @@ function arrays() {
   console.log(`names[1]: ${names[1]}`);
 
   //.join()
+  console.log(names.join(', '));
 
   //.push() & .pop()
+  names.push('Schemp');
+  console.log(names);
+  
+  let n = names.pop();
+  console.log(names);
+  console.log(n);
 
   //.shift() & .unshift()
+  names.unshift('Schemp');
+  console.log(names);
+
+  names.shift();
+  console.log(names);
 
   //.concat()
+  const lesserKnownStooges = ['Schemp', 'Joe'];
+  const moreNames = names.concat(lesserKnownStooges);
+  console.log(moreNames);
+  console.log(names);
+
 
   //.slice()
+  console.log(names.slice(1, 3));
 
   //.reverse() and .sort()
+  names.reverse();
+  console.log(names);
+
+  names.sort();
+  console.log(names);
 
   //.indexOf() and .lastIndexOf()
+  console.log(names.indexOf('Larry'));
+  console.log(names.lastIndexOf('Joe'));
 
   //spread operator (...)
+  const allStooges = [...names, 'David', ...lesserKnownStooges];
+  console.log(allStooges);
+
+  const sortedStooges = [...allStooges].sort();
+  console.log(sortedStooges);
 
 }
