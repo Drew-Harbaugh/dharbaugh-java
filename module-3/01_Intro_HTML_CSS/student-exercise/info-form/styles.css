@@ -6,7 +6,7 @@ main {
 }
 
 body {
-    background-image: url("https://1.bp.blogspot.com/_F8jAwEiruts/SydzJu9FJLI/AAAAAAAABbw/4EXlXApRvH0/s400/Chelsea-Fans-wallpaper-3-468x311.jpg");
+    background-color: #034694;
     background-repeat: no-repeat;
     background-size: 1300px 700px;
 }
@@ -36,3 +36,4 @@ nav {
 input {
     margin-bottom: 20px;
 }
+
