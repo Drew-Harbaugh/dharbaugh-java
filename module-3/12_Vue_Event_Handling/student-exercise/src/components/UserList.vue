@@ -15,7 +15,7 @@
       <tbody>
         <tr>
           <td>
-            <input type="checkbox" id="selectAll" />
+            <input v-bind:checked="allChecked" v-on:change="toggleAll()" type="checkbox" id="selectAll" />
           </td>
           <td>
             <input type="text" id="firstNameFilter" v-model="filter.firstName" />
@@ -52,21 +52,23 @@
           <td>{{ user.emailAddress }}</td>
           <td>{{ user.status }}</td>
           <td>
-            <button class="btnEnableDisable">Enable or Disable</button>
+            <button class="btnEnableDisable" v-on:click.prevent="flipStatus(user.id); enableDisable=false" v-if="user.status === 'Active'">Disable</button>
+            <button class="btnEnableDisable" v-on:click.prevent="flipStatus(user.id); enableDisable=true" v-else>Enable</button>
           </td>
         </tr>
       </tbody>
     </table>
 
+
     <div class="all-actions">
-      <button>Enable Users</button>
-      <button>Disable Users</button>
-      <button>Delete Users</button>
+      <button v-on:click="enableSelectedUsers()" v-bind:disabled="actionButtonDisabled">Enable Users</button>
+      <button v-on:click="disableSelectedUsers()" v-bind:disabled="actionButtonDisabled">Disable Users</button>
+      <button v-on:click="deleteSelectedUsers()" v-bind:disabled="actionButtonDisabled">Delete Users</button>
     </div>
 
-    <button>Add New User</button>
+    <button v-on:click="showForm = !showForm">Add New User</button>
 
-    <form id="frmAddNewUser">
+    <form id="frmAddNewUser" v-on:submit.prevent="saveUser()" v-show="showForm">
       <div class="field">
         <label for="firstName">First Name:</label>
         <input type="text" name="firstName" />
@@ -93,6 +95,10 @@ export default {
   name: "user-list",
   data() {
     return {
+      showForm: false,
+      selectedUserIDs: [],
+      
+    
       filter: {
         firstName: "",
         lastName: "",
@@ -160,8 +166,101 @@ export default {
       ]
     };
   },
-  methods: {},
+  methods: {
+    
+    saveUser() {
+      this.users.push(this.newUser);
+      this.resetForm();
+    },
+    resetForm() {
+      this.newUser = {};
+    },
+
+    addId(id){
+      if(!this.selectedUserIDs.includes(id)){
+        this.selectedUserIDs.unshift(id);
+      } else {
+        this.selectedUserIDs = this.selectedUserIDs.filter(e => {
+          return e !== id;
+        });
+      }
+    },
+    selectAll() {
+      this.users.forEach(e => {
+        if (!this.selectedUserIDs.includes(e.id)) {
+          this.selectedUserIDs.unshift(e.id);
+        }
+      })
+    },
+    deselectAll() {
+      this.selectedUserIDs = [];
+    },
+    toggleAll(){
+      if(!document.getElementById('selectAll').checked) {
+        this.deselectAll();
+      } else {
+        this.selectAll();
+      }
+    },
+    allChecked(){
+      return this.users.length === this.selectedUserIDs.length;
+    },
+
+
+    enableSelectedUsers() {
+      this.users.forEach(element => {
+        if(this.selectedUserIDs.includes(element.id)){
+          element.status = "Active";
+        }
+      });
+      this.selectedUserIDs = [];
+    },
+    disableSelectedUsers() {
+      this.users.forEach(element => {
+        if(this.selectedUserIDs.includes(element.id)){
+          element.status = "Disabled";
+        }
+      });
+      this.selectedUserIDs = [];
+    },
+    deleteSelectedUsers() {
+      this.users = this.users.filter(e => {
+        return !this.selectedUserIDs.includes(e.id)
+      })
+      this.selectedUserIDs = [];
+    },
+
+
+    flipStatus(id) {
+      let user = this.getUserById(id);
+
+      if (user.status === 'Active') {
+        user.status = 'Disabled';
+      } else if (user.status === 'Disabled') {
+        user.status = 'Active';
+      }
+    },
+    getUserById(id) {
+      for (let user of this.users) {
+        if (user.id === id) {
+          return user;
+        }
+      }
+      return null;
+    }
+  },
   computed: {
+
+
+
+     actionButtonDisabled() {
+      if(this.selectedUserIDs.length === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
     filteredList() {
       let filteredUsers = this.users;
       if (this.filter.firstName != "") {
@@ -198,9 +297,13 @@ export default {
         );
       }
       return filteredUsers;
-    }
+    },
+   
   }
 };
+
+
+
 </script>
 
 <style scoped>
