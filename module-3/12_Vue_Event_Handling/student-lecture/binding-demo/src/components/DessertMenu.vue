@@ -3,11 +3,20 @@
     <div>
         <div>
             <select v-model='selectedIndex'>
-                <option v-for='(name, index) in categoryNames' :key='name' :value="index">{{ name }}</option>
+                <option 
+                v-for='(name, index) in categoryNames' 
+                v-bind:key='name' 
+                v-bind:value="index"
+                >
+                {{ name }}
+                </option>
             </select>
         </div>
-        <div class="checkboxes" v-for="item in dessertCategories[selectedIndex].items" :key='item'>
-            <input  v-model="currentOrder" :value='item' type="checkbox">
+        <div 
+        class="checkboxes" 
+        v-for="item in dessertCategories[selectedIndex].items" 
+        :key='item'>
+            <input  v-model="currentOrder" :value='item' type="checkbox"/>
             <label>{{ item }}</label>
         </div>
         <div v-if="currentOrder.length > 0">

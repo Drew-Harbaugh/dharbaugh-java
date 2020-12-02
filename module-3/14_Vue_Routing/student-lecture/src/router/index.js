@@ -1,12 +1,29 @@
 // @ts-nocheck
 
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-Vue.use(VueRouter)
+import Products from '@/views/Products.vue';
+import Details from '@/views/Details.vue'
+
+Vue.use(VueRouter);
 
 const routes = [
-
+{
+  path: '/',
+  name: 'home',
+  component: Products
+},
+{
+  path: '/products/:id',
+  name: 'productDetails',
+  component: Details
+},
+{
+  path: '/products/:id/new-review',
+  name: 'createReview',
+  component: Create
+},
 ]
 
 const router = new VueRouter({
@@ -15,4 +32,4 @@ const router = new VueRouter({
   routes
 })
 
-export default router
+export default router;
