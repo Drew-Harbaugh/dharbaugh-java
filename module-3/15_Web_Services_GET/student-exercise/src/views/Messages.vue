@@ -6,6 +6,7 @@
 
 <script>
 import TopicDetails from '@/components/TopicDetails.vue';
+import services from '@/services/services.js';
 
 export default {
   name: 'Messages',
@@ -20,6 +21,12 @@ export default {
         messages: []
       },
     }
+  },
+  created() {
+    services.getTopic(this.$route.params.id).then(response => {
+      this.activeTopic = response.data;
+    });    
+    }
   }
-}
+
 </script>

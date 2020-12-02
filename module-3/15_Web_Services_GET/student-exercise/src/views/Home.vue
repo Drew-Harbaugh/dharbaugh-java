@@ -7,6 +7,7 @@
 
 <script>
 import TopicList from '@/components/TopicList.vue';
+import services from '@/services/services.js'
 
 export default {
   name: 'Home',
@@ -17,6 +18,11 @@ export default {
     return {
       allTopics: []
     }
+  },
+  created() {
+    services.getTopicList().then((response => {
+      this.allTopics = response.data;
+    }));
   }
 }
 </script>
