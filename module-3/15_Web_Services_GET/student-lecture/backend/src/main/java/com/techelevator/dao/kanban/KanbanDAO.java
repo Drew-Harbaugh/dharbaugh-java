@@ -12,6 +12,8 @@ public interface KanbanDAO {
 
     public Board getBoard(long boardId);
 
+    public Card getCard(long cardId);
+
     public Board createBoard(Board board);
 
     public Card createCard(long boardId, Card card);

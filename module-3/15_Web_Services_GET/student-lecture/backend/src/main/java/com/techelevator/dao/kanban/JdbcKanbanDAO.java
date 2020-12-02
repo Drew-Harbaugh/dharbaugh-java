@@ -45,6 +45,17 @@ public class JdbcKanbanDAO implements KanbanDAO {
         }
     }
 
+    @Override
+    public Card getCard(long cardId) {
+        String sql = "SELECT id, title, description, avatar, creation_date, status, tag FROM cards WHERE board_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, cardId);
+        if (rowSet.next()) {
+            Card card = mapRowToCard(rowSet);
+            card.setComments();
+        }
+
+    }
+
     private List<Card> getCardsForBoardId(long boardId) {
         List<Card> result = new ArrayList<>();
         String sql = "SELECT id, title, description, avatar, creation_date, status, tag FROM cards WHERE board_id = ?;";

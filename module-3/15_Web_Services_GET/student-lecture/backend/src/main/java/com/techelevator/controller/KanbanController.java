@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.kanban.KanbanDAO;
 import com.techelevator.model.kanban.Board;
+import com.techelevator.model.kanban.Card;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -32,6 +33,18 @@ public class KanbanController {
         Board result = kanbanDAO.getBoard(id);
         if (result == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No board with that id.");
+        } else {
+            return result;
+        }
+    }
+
+    @GetMapping("/cards/{id}")
+    public Card getCard(@PathVariable long id) throws InterruptedException {
+        Thread.sleep(1000);
+
+        Card result = kanbanDAO.getCard(id);
+        if (result == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No card with that id.");
         } else {
             return result;
         }

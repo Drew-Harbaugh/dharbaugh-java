@@ -14,4 +14,8 @@ export default {
     return http.get(`/boards/${boardID}`)
   },
 
+  getCard(cardID) {
+    return http.get('/cards/' + cardID)
+  }
+
 }
